@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Projects & Skills — Jahanzaib Wakeel</title>
+  <meta name="description" content="Projects and technical skills of Jahanzaib Wakeel — Full-Stack Software Engineer."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ── SHARED UI ───────────────────────────── -->
+<div id="progress"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ══════════════════════════════════
+     NAV
+══════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo" data-glitch>JW<span class="dot">.</span><span class="version">v2025</span></div>
+  <ul class="nav-links">
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#page2-contact">contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="index.html" class="nav-page-link">← about me</a>
+    <button class="nav-cta" data-modal="open"><span class="label">hire me →</span></button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+     HIRE ME MODAL (same on both pages)
+══════════════════════════════════ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-top-bar"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-eyebrow">// open to opportunities</div>
+    <div class="modal-title">Let's Build<br/>Together.</div>
+    <div class="modal-sub">Full-time · Contract · Freelance — available in Karachi or fully remote.</div>
+    <div class="modal-links">
+      <a href="mailto:jahanzaibwakeel4@gmail.com" class="modal-link">
+        <div class="mlink-icon">✉</div>
+        <div><span class="mlink-label">Email</span><span class="mlink-value">jahanzaibwakeel4@gmail.com</span></div>
+      </a>
+      <a href="tel:+923032788060" class="modal-link">
+        <div class="mlink-icon">☏</div>
+        <div><span class="mlink-label">Phone</span><span class="mlink-value">+92 303 278 8060</span></div>
+      </a>
+      <a href="https://linkedin.com/in/jahanzaib-wakeel060/" target="_blank" class="modal-link">
+        <div class="mlink-icon">in</div>
+        <div><span class="mlink-label">LinkedIn</span><span class="mlink-value">linkedin.com/in/jahanzaib-wakeel060</span></div>
+      </a>
+      <a href="https://github.com/jahanzaibwakeel" target="_blank" class="modal-link">
+        <div class="mlink-icon">&lt;/&gt;</div>
+        <div><span class="mlink-label">GitHub</span><span class="mlink-value">github.com/jahanzaibwakeel</span></div>
+      </a>
+      <div class="modal-link">
+        <div class="mlink-icon">📍</div>
+        <div><span class="mlink-label">Location</span><span class="mlink-value">Karachi, Pakistan · Remote OK</span></div>
+      </div>
+    </div>
+    <div class="modal-status">
+      <div class="status-dot"></div>
+      <span>Currently available — seeking full-time roles</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE 2 HERO
+══════════════════════════════════ -->
+<section id="page2-hero" style="position:relative">
+  <canvas id="particle-canvas" style="position:absolute;inset:0;pointer-events:none;z-index:0"></canvas>
+  <div class="p2-hero-grid"></div>
+  <div class="p2-hero-content" style="position:relative;z-index:1">
+    <div class="p2-tag">// projects &amp; technical skills</div>
+    <h1 class="p2-title">What I've<br/><em>Built</em> &amp;<br/>What I Know.</h1>
+    <p class="p2-desc">5 production-grade projects. 12+ technologies. All built from scratch to solve real problems — not tutorial clones.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SKILLS  — rendered by projects.js
+══════════════════════════════════ -->
+<section id="skills">
+  <div class="mxw">
+    <div class="sec-eyebrow" data-reveal data-delay="1">Technical Skills</div>
+    <h2 class="sec-title" data-reveal data-delay="2">What I <em>work with.</em></h2>
+    <div class="skills-grid" id="skills-grid">
+      <!-- Injected by projects.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     PROJECTS — rendered by projects.js
+══════════════════════════════════ -->
+<section id="projects">
+  <div class="mxw">
+    <div class="sec-eyebrow" data-reveal data-delay="1">Featured Projects</div>
+    <h2 class="sec-title" data-reveal data-delay="2">Things I've <em>built.</em></h2>
+    <div class="proj-grid" id="projects-grid">
+      <!-- Injected by projects.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     EXPERIENCE
+══════════════════════════════════ -->
+<section id="experience">
+  <div class="mxw">
+    <div class="sec-eyebrow" data-reveal data-delay="1">Experience</div>
+    <h2 class="sec-title" data-reveal data-delay="2">Where I've <em>worked.</em></h2>
+    <div class="exp-timeline">
+      <div class="exp-item" data-reveal>
+        <div class="exp-dot"></div>
+        <div class="exp-date">Oct 2025 — Dec 2025 · Remote · Dubai, UAE</div>
+        <div class="exp-co">Sora LLC</div>
+        <div class="exp-role">Software Engineer Intern</div>
+        <ul class="exp-bullets">
+          <li>Developed and maintained responsive client-facing web applications using React.js and JavaScript (ES6+) across multiple concurrent client projects.</li>
+          <li>Designed and implemented RESTful API endpoints with Node.js and Express.js — input validation, structured error handling, proper HTTP conventions.</li>
+          <li>Debugged frontend and API integration issues across the full stack, identified root causes, and shipped reliable fixes without close supervision.</li>
+          <li>Integrated third-party APIs and managed data interactions with MongoDB and MySQL, ensuring consistency and data integrity.</li>
+          <li>Participated in remote Agile workflows — async stand-ups, PR reviews, sprint deliverables — consistently delivering on time across time zones.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CONTACT
+══════════════════════════════════ -->
+<section id="page2-contact">
+  <div class="mxw">
+    <div class="p2-contact-wrap" data-reveal>
+      <h2 class="p2-ct-title">Let's <em>build</em><br/>something.</h2>
+      <p class="p2-ct-sub">Open to full-time Software Engineer roles in Karachi or remote. If you have a hard problem worth solving — I'd love to hear about it.</p>
+      <div class="p2-ct-links">
+        <a href="mailto:jahanzaibwakeel4@gmail.com" class="ct-link">
+          <div class="ct-ico">✉</div>
+          <div><span class="ct-label">Email</span><span class="ct-val">jahanzaibwakeel4@gmail.com</span></div>
+        </a>
+        <a href="tel:+923032788060" class="ct-link">
+          <div class="ct-ico">☏</div>
+          <div><span class="ct-label">Phone</span><span class="ct-val">+92 303 278 8060</span></div>
+        </a>
+        <a href="https://github.com/jahanzaibwakeel" target="_blank" class="ct-link">
+          <div class="ct-ico">&lt;/&gt;</div>
+          <div><span class="ct-label">GitHub</span><span class="ct-val">github.com/jahanzaibwakeel</span></div>
+        </a>
+        <a href="https://linkedin.com/in/jahanzaib-wakeel060/" target="_blank" class="ct-link">
+          <div class="ct-ico">in</div>
+          <div><span class="ct-label">LinkedIn</span><span class="ct-val">linkedin.com/in/jahanzaib-wakeel060</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Jahanzaib Wakeel <span>·</span> Software Engineer <span>·</span> <span id="year"></span></p>
+  <p><a href="index.html" style="color:var(--volt)">← Back to About</a></p>
+</footer>
+
+<!-- ── SCRIPTS ──────────────────────────── -->
+<script src="js/main.js"></script>
+<script src="js/projects.js"></script>
+</body>
+</html>

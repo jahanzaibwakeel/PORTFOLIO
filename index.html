@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Jahanzaib Wakeel — Software Engineer</title>
+  <meta name="description" content="Jahanzaib Wakeel — Full-Stack Software Engineer. React, Next.js, Angular, TypeScript, Node.js, FastAPI, PostgreSQL. Karachi, Pakistan."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ── SHARED UI ───────────────────────────── -->
+<div id="progress"></div>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ══════════════════════════════════
+     NAV
+══════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo" data-glitch>JW<span class="dot">.</span><span class="version">v2025</span></div>
+  <ul class="nav-links">
+    <li><a href="#hero">home</a></li>
+    <li><a href="#about">about</a></li>
+    <li><a href="#education">education</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="projects.html" class="nav-page-link">projects &amp; skills →</a>
+    <button class="nav-cta" data-modal="open"><span class="label">hire me →</span></button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+     HIRE ME MODAL
+══════════════════════════════════ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-top-bar"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-eyebrow">// open to opportunities</div>
+    <div class="modal-title">Let's Build<br/>Together.</div>
+    <div class="modal-sub">Full-time · Contract · Freelance — available in Karachi or fully remote.</div>
+    <div class="modal-links">
+      <a href="mailto:jahanzaibwakeel4@gmail.com" class="modal-link">
+        <div class="mlink-icon">✉</div>
+        <div><span class="mlink-label">Email</span><span class="mlink-value">jahanzaibwakeel4@gmail.com</span></div>
+      </a>
+      <a href="tel:+923032788060" class="modal-link">
+        <div class="mlink-icon">☏</div>
+        <div><span class="mlink-label">Phone</span><span class="mlink-value">+92 303 278 8060</span></div>
+      </a>
+      <a href="https://linkedin.com/in/jahanzaib-wakeel060/" target="_blank" class="modal-link">
+        <div class="mlink-icon">in</div>
+        <div><span class="mlink-label">LinkedIn</span><span class="mlink-value">linkedin.com/in/jahanzaib-wakeel060</span></div>
+      </a>
+      <a href="https://github.com/jahanzaibwakeel" target="_blank" class="modal-link">
+        <div class="mlink-icon">&lt;/&gt;</div>
+        <div><span class="mlink-label">GitHub</span><span class="mlink-value">github.com/jahanzaibwakeel</span></div>
+      </a>
+      <div class="modal-link">
+        <div class="mlink-icon">📍</div>
+        <div><span class="mlink-label">Location</span><span class="mlink-value">Karachi, Pakistan · Remote OK</span></div>
+      </div>
+    </div>
+    <div class="modal-status">
+      <div class="status-dot"></div>
+      <span>Currently available — seeking full-time roles</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO — 3D Canvas Scene
+══════════════════════════════════ -->
+<section id="hero">
+  <canvas id="three-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="blink"></span>
+      <span id="typed-tag"></span>
+    </div>
+    <h1 class="hero-name" data-glitch>
+      Jahanzaib<br/>
+      <span class="volt-text">Wakeel</span>
+    </h1>
+    <p class="hero-role">Software Engineer · Full-Stack Developer</p>
+    <p class="hero-desc">
+      I build fast, scalable, production-ready web applications — from pixel-perfect
+      React &amp; Angular frontends to robust Node.js and FastAPI backends.
+      Clean code. Real projects. No fluff.
+    </p>
+    <div class="hero-actions">
+      <a href="projects.html" class="btn-volt">View My Work →</a>
+      <button class="btn-outline" data-modal="open">Get In Touch</button>
+    </div>
+    <div class="hero-chips-row">
+      <span class="chip">React.js</span>
+      <span class="chip">Next.js</span>
+      <span class="chip">Angular</span>
+      <span class="chip">TypeScript</span>
+      <span class="chip">Node.js</span>
+      <span class="chip">FastAPI</span>
+      <span class="chip">Python</span>
+      <span class="chip">PostgreSQL</span>
+      <span class="chip">SQL</span>
+      <span class="chip">Docker</span>
+      <span class="chip">Prisma ORM</span>
+      <span class="chip">MongoDB</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     ABOUT
+══════════════════════════════════ -->
+<section id="about">
+  <div class="mxw">
+    <div class="sec-eyebrow" data-reveal data-delay="1">About Me</div>
+    <h2 class="sec-title" data-reveal data-delay="2">Building things that<br/><em>actually work.</em></h2>
+    <div class="about-grid">
+
+      <div class="about-text" data-reveal="left">
+        <p>I'm a <strong>Computer Science graduate from FAST NUCES Karachi</strong> (2021–2025) with a genuine passion for engineering software that solves real problems — not just tutorial clones.</p>
+        <p>My stack spans the full product lifecycle: <strong>React.js, Next.js, Angular</strong> on the frontend, <strong>Node.js/Express and Python FastAPI</strong> on the backend, <strong>PostgreSQL, MongoDB, MySQL</strong> and raw SQL for data, and <strong>Docker</strong> for deployment.</p>
+        <p>I completed a <strong>remote internship at Sora LLC</strong> (Dubai-based agency) delivering production features across multiple client projects simultaneously — independently, on time, without hand-holding.</p>
+        <p>I'm not looking for a job where I follow instructions. I want a role where I can <em>own problems</em>, think in systems, and grow alongside engineers who take their craft seriously.</p>
+        <div class="about-meta">
+          <div class="meta-item"><span>📍</span> Karachi, Pakistan</div>
+          <div class="meta-item"><span>🎓</span> FAST NUCES · CS · 2025</div>
+          <div class="meta-item"><span>💼</span> Sora LLC · Remote Intern</div>
+          <div class="meta-item"><span>✅</span> Available Immediately</div>
+        </div>
+      </div>
+
+      <div class="about-right" data-reveal="right">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">5+</div>
+            <div class="stat-lbl">Production Projects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">4</div>
+            <div class="stat-lbl">Years CS Degree</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">12+</div>
+            <div class="stat-lbl">Technologies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" style="font-size:2rem">∞</div>
+            <div class="stat-lbl">Bugs Squashed</div>
+          </div>
+        </div>
+        <div class="about-cv-card" data-reveal="scale">
+          <div class="cv-card-bar"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+            <div>
+              <div class="cv-name-lg">Jahanzaib Wakeel</div>
+              <div class="cv-role-sm">Software Engineer · Full-Stack</div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--volt)">CV·2025</div>
+          </div>
+          <div class="cv-number"><span class="v">JW</span> · 2021–2025 · FAST NUCES</div>
+          <div class="cv-footer">
+            <div><div style="font-size:.58rem;margin-bottom:2px">LOCATION</div><div>Karachi, PK</div></div>
+            <div><div style="font-size:.58rem;margin-bottom:2px">STATUS</div><div class="open">● Open</div></div>
+            <div><div style="font-size:.58rem;margin-bottom:2px">GRAD</div><div>Jun 2025</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     EDUCATION
+══════════════════════════════════ -->
+<section id="education">
+  <div class="mxw">
+    <div class="sec-eyebrow" data-reveal data-delay="1">Education</div>
+    <h2 class="sec-title" data-reveal data-delay="2">Where I <em>learned.</em></h2>
+    <div class="edu-card" data-reveal>
+      <div>
+        <div class="edu-eyebrow">Sep 2021 — Jun 2025</div>
+        <div class="edu-degree">Bachelor of Science — Computer Science</div>
+        <div class="edu-school">FAST NUCES · Karachi, Pakistan</div>
+        <div class="edu-courses">
+          <span class="chip">Data Structures &amp; Algorithms</span>
+          <span class="chip">Object-Oriented Programming</span>
+          <span class="chip">Database Systems</span>
+          <span class="chip">Software Engineering</span>
+          <span class="chip">Operating Systems</span>
+          <span class="chip">Computer Networks</span>
+          <span class="chip">Web Technologies</span>
+          <span class="chip">Artificial Intelligence</span>
+          <span class="chip">Compiler Construction</span>
+          <span class="chip">Theory of Automata</span>
+        </div>
+      </div>
+      <div class="edu-badge">
+        <div class="edu-badge-big">BS</div>
+        <div class="edu-badge-sub">Computer<br/>Science</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     CTA → PROJECTS PAGE
+══════════════════════════════════ -->
+<section id="page1-cta">
+  <div class="mxw">
+    <div class="cta-inner" data-reveal>
+      <div class="cta-title">See what I've<br/><em>built.</em></div>
+      <p class="cta-sub">5+ production-grade projects across fraud detection, AI recommendations, field service management, and more. All real. All from scratch.</p>
+      <div class="cta-actions">
+        <a href="projects.html" class="btn-volt">View Projects &amp; Skills →</a>
+        <button class="btn-outline" data-modal="open">Hire Me</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Jahanzaib Wakeel <span>·</span> Software Engineer <span>·</span> <span id="year"></span></p>
+  <p>Built from scratch — <span>no frameworks</span></p>
+</footer>
+
+<!-- ── SCRIPTS ──────────────────────────── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/hero.js"></script>
+<script>
+  /* typed tag — stays here because it references a specific DOM ID */
+  document.addEventListener("DOMContentLoaded", () => {
+    typeText(document.getElementById("typed-tag"), "Available for full-time roles · Karachi, Pakistan", 28, 600);
+  });
+</script>
+</body>
+</html>
