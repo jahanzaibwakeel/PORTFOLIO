@@ -504,6 +504,7 @@ section { padding: 6rem 2.5rem; position: relative; }
   display: flex;
   align-items: center;
   overflow: hidden;
+  isolation: isolate;
 }
 #three-canvas {
   position: absolute;
@@ -520,12 +521,14 @@ section { padding: 6rem 2.5rem; position: relative; }
     rgba(7,8,10,0.65) 100%
   );
   z-index: 1;
+  pointer-events: none;
 }
 .hero-content {
   position: relative;
   z-index: 2;
   padding: 0 2.5rem;
-  max-width: 900px;
+  max-width: 720px;
+  will-change: transform, opacity, filter;
 }
 .hero-eyebrow {
   display: inline-flex;
