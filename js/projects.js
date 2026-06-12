@@ -198,10 +198,25 @@ function renderSkills() {
 function renderProjects() {
   const grid = document.getElementById("projects-grid");
   if (!grid) return;
+  const toolbar = document.createElement("div");
+  toolbar.className = "project-toolbar";
+  toolbar.innerHTML = `
+    <div class="project-filters" aria-label="Project filters">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="ai">AI</button>
+      <button class="filter-pill" data-filter="data">Data</button>
+      <button class="filter-pill" data-filter="saas">SaaS</button>
+      <button class="filter-pill" data-filter="frontend">Frontend</button>
+    </div>
+    <button class="spotlight-toggle" type="button">Spotlight strongest work</button>
+  `;
+  grid.before(toolbar);
   grid.innerHTML = PROJECTS.map((p, i) => `
     <div class="proj-card ${p.featured ? "featured" : ""}"
+         data-project-tags="${projectTags(p).join(" ")}"
          data-reveal data-delay="${i + 1}"
          onclick="openProjectModal('${p.id}')">
+      <div class="proj-signal"><span></span><span></span><span></span></div>
       <div>
         <div class="proj-eyebrow">${p.type}</div>
         <div class="proj-name">${p.name}</div>
@@ -219,6 +234,45 @@ function renderProjects() {
       </div>
     </div>
   `).join("");
+}
+
+function projectTags(project) {
+  const blob = `${project.type} ${project.name} ${project.short} ${project.stack.join(" ")}`.toLowerCase();
+  const tags = [];
+  if (/\bai\b/.test(blob) || blob.includes("llm") || blob.includes("recommendation") || blob.includes("machine")) tags.push("ai");
+  if (blob.includes("fraud") || blob.includes("analytics") || blob.includes("postgresql") || blob.includes("grafana")) tags.push("data");
+  if (blob.includes("saas") || blob.includes("field") || blob.includes("multi-role")) tags.push("saas");
+  if (blob.includes("frontend") || blob.includes("react") || blob.includes("angular")) tags.push("frontend");
+  return tags.length ? tags : ["frontend"];
+}
+
+function initProjectFilters() {
+  const toolbar = document.querySelector(".project-toolbar");
+  const cards = document.querySelectorAll(".proj-card");
+  if (!toolbar || !cards.length) return;
+
+  toolbar.addEventListener("click", e => {
+    const filter = e.target.closest("[data-filter]");
+    const spotlight = e.target.closest(".spotlight-toggle");
+
+    if (filter) {
+      toolbar.querySelectorAll("[data-filter]").forEach(btn => btn.classList.remove("active"));
+      filter.classList.add("active");
+      const key = filter.dataset.filter;
+      cards.forEach(card => {
+        const tags = card.dataset.projectTags || "";
+        card.classList.toggle("hide-card", key !== "all" && !tags.includes(key));
+      });
+    }
+
+    if (spotlight) {
+      spotlight.classList.toggle("active");
+      cards.forEach(card => {
+        const isFeatured = card.classList.contains("featured") || (card.dataset.projectTags || "").includes("ai data");
+        card.classList.toggle("spotlight", spotlight.classList.contains("active") && isFeatured);
+      });
+    }
+  });
 }
 
 /* ── PROJECT DETAIL MODAL ──────────────────────────── */
@@ -375,6 +429,9 @@ function initHashScroll() {
 document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
   renderProjects();
+  initProjectFilters();
+  if (typeof initCursorHover === "function") initCursorHover();
+  if (typeof initTilt === "function") initTilt();
   buildProjectModal();
   initParticleBg();
   initHashScroll();
