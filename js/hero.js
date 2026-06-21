@@ -45,6 +45,12 @@ function initHero() {
   const floaters = createFloatingBadges();
   floaters.forEach(item => scene.add(item));
 
+  const projectNodes = createProjectNodes();
+  projectNodes.forEach(item => scene.add(item));
+
+  const dataStreams = createDataStreams();
+  scene.add(dataStreams);
+
   scene.add(new THREE.AmbientLight(0x21304f, 2.7));
   const key = new THREE.PointLight(0x00f5ff, 5.8, 38);
   key.position.set(-4, 6, 7);
@@ -75,8 +81,10 @@ function initHero() {
       scrollTrigger: {
         trigger: "#hero",
         start: "top top",
-        end: "bottom top",
-        scrub: 0.85,
+        end: "+=120%",
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
         onUpdate: self => {
           scrollProgress = self.progress;
           cam.progress = self.progress;
@@ -90,7 +98,7 @@ function initHero() {
       }, 0)
       .to(laptop.group.rotation, { y: -0.02, x: 0.02, ease: "power2.inOut" }, 0)
       .to(laptop.group.position, { x: 2.15, y: -1.32, z: -1.72, ease: "power2.inOut" }, 0)
-      .to(".hero-content", { y: -70, opacity: 0.3, ease: "power2.inOut" }, 0.34)
+      .to(".hero-content", { y: -72, opacity: 0.26, ease: "power2.inOut" }, 0.38)
       .to(".hero-scroll", { opacity: 0, ease: "power1.out" }, 0.05);
 
     gsap.fromTo("#about", { "--section-glow": 0 }, {
@@ -127,7 +135,7 @@ function initHero() {
     laptop.update(t, scrollProgress);
     tunnel.rotation.z += 0.0014 + scrollProgress * 0.002;
     tunnel.children.forEach((ring, i) => {
-      ring.material.opacity = 0.05 + Math.sin(t * 1.6 + i) * 0.018 + scrollProgress * 0.06;
+      ring.material.opacity = 0.06 + Math.sin(t * 1.6 + i) * 0.018 + scrollProgress * 0.08;
       ring.scale.setScalar(1 + Math.sin(t + i) * 0.025);
     });
 
@@ -135,6 +143,18 @@ function initHero() {
       item.position.y = item.userData.baseY + Math.sin(t * item.userData.speed + i) * 0.18;
       item.rotation.y += item.userData.spin;
       item.material.opacity = 0.45 + scrollProgress * 0.32;
+    });
+
+    projectNodes.forEach((item, i) => {
+      const orbit = t * item.userData.speed + item.userData.phase + scrollProgress * 1.2;
+      item.position.x = item.userData.cx + Math.cos(orbit) * item.userData.radius;
+      item.position.z = item.userData.cz + Math.sin(orbit) * item.userData.radius * 0.55;
+      item.position.y = item.userData.baseY + Math.sin(t * 0.9 + i) * 0.16;
+      item.material.opacity = 0.54 + scrollProgress * 0.28;
+    });
+
+    dataStreams.children.forEach((line, i) => {
+      line.material.opacity = 0.16 + Math.sin(t * 2 + i) * 0.06 + scrollProgress * 0.1;
     });
 
     stars.rotation.y += 0.00028 + scrollProgress * 0.0007;
@@ -253,6 +273,7 @@ function createScreenTexture() {
   const texture = new THREE.CanvasTexture(canvas);
   texture.minFilter = THREE.LinearFilter;
   texture.magFilter = THREE.LinearFilter;
+  texture.userData = { lastProgress: -1 };
 
   let lastTextureFrame = -1;
   function draw(time, progress) {
@@ -281,53 +302,53 @@ function createScreenTexture() {
     }
 
     ctx.fillStyle = "rgba(255,255,255,0.06)";
-    roundRect(ctx, 56, 48, 912, 64, 18);
+    roundRect(ctx, 38, 34, 644, 46, 14);
     ctx.fill();
     ctx.fillStyle = "#f8ff4a";
-    ctx.font = "700 25px Syne, Arial";
-    ctx.fillText("Jahanzaib Wakeel / Full-Stack Engineer", 92, 90);
+    ctx.font = "700 18px Syne, Arial";
+    ctx.fillText("Jahanzaib Wakeel / Full-Stack Engineer", 64, 62);
 
     const pulse = Math.sin(time * 3) * 0.5 + 0.5;
     ctx.fillStyle = `rgba(0,245,255,${0.16 + pulse * 0.12})`;
-    roundRect(ctx, 60, 136, 420 + progress * 180, 150, 22);
+    roundRect(ctx, 42, 104, 300 + progress * 126, 110, 18);
     ctx.fill();
     ctx.fillStyle = "#ffffff";
-    ctx.font = "800 56px Syne, Arial";
-    ctx.fillText("Build", 96, 204);
+    ctx.font = "800 42px Syne, Arial";
+    ctx.fillText("Build", 68, 154);
     ctx.fillStyle = "#ff2bd6";
-    ctx.fillText("Systems", 96, 262);
+    ctx.fillText("Systems", 68, 198);
 
     const cards = [
       ["React", "#00f5ff"], ["Node", "#f8ff4a"], ["FastAPI", "#ff2bd6"],
       ["Postgres", "#bc8cff"], ["Docker", "#00f5ff"], ["AI", "#f8ff4a"],
     ];
     cards.forEach((card, i) => {
-      const x = 562 + (i % 2) * 190;
-      const y = 142 + Math.floor(i / 2) * 92;
+      const x = 394 + (i % 2) * 136;
+      const y = 106 + Math.floor(i / 2) * 66;
       ctx.fillStyle = "rgba(255,255,255,0.075)";
-      roundRect(ctx, x, y, 158, 58, 16);
+      roundRect(ctx, x, y, 112, 42, 12);
       ctx.fill();
       ctx.fillStyle = card[1];
-      ctx.font = "600 24px JetBrains Mono, monospace";
-      ctx.fillText(card[0], x + 18, y + 38);
+      ctx.font = "600 16px JetBrains Mono, monospace";
+      ctx.fillText(card[0], x + 12, y + 27);
     });
 
     ctx.fillStyle = "rgba(0,0,0,0.28)";
-    roundRect(ctx, 62, 340, 900, 230, 22);
+    roundRect(ctx, 44, 250, 632, 162, 18);
     ctx.fill();
-    ctx.font = "500 22px JetBrains Mono, monospace";
+    ctx.font = "500 15px JetBrains Mono, monospace";
     const lines = [
       ["$ npm run ship", "#f8ff4a"],
-      ["> compiling dashboards, APIs, auth, databases", "#cdd5e0"],
-      ["> camera.flyTo(laptop.screen) // scroll linked", "#00f5ff"],
-      ["> recruiterResponse: 'wow, this feels senior'", "#ff2bd6"],
+      ["> FraudPulse + ClinIQ AI + RecoLab", "#cdd5e0"],
+      ["> APIs, auth, dashboards, databases", "#00f5ff"],
+      ["> scroll camera: laptop.screen.focus()", "#ff2bd6"],
     ];
     lines.forEach((line, i) => {
       ctx.fillStyle = line[1];
-      ctx.fillText(line[0], 94, 388 + i * 43);
+      ctx.fillText(line[0], 66, 284 + i * 31);
     });
 
-    const scanY = 110 + ((time * 90) % 440);
+    const scanY = 80 + ((time * 70) % 310);
     const scan = ctx.createLinearGradient(0, scanY - 30, 0, scanY + 30);
     scan.addColorStop(0, "rgba(0,245,255,0)");
     scan.addColorStop(0.5, "rgba(0,245,255,0.22)");
@@ -374,7 +395,7 @@ function createLightTunnel() {
 }
 
 function createFloatingBadges() {
-  const labels = ["API", "SQL", "AI", "UX", "AUTH"];
+  const labels = ["API", "SQL", "AI", "UX", "AUTH", "CACHE", "DOCKER", "FASTAPI", "NEXT"];
   const items = [];
   labels.forEach((label, i) => {
     const texture = makeBadgeTexture(label);
@@ -385,7 +406,7 @@ function createFloatingBadges() {
       depthWrite: false,
     });
     const sprite = new THREE.Sprite(material);
-    sprite.position.set(-5 + i * 1.75, 1.1 + (i % 3) * 0.85, -2.8 - (i % 4) * 1.5);
+    sprite.position.set(-5.6 + i * 1.38, 0.85 + (i % 3) * 0.78, -2.6 - (i % 5) * 1.15);
     sprite.scale.set(1.05, 0.38, 1);
     sprite.userData = {
       baseY: sprite.position.y,
@@ -395,6 +416,87 @@ function createFloatingBadges() {
     items.push(sprite);
   });
   return items;
+}
+
+function createProjectNodes() {
+  const nodes = [
+    ["FraudPulse", "#00f5ff", -2.8, 2.55, -2.9],
+    ["ClinIQ AI", "#f8ff4a", 6.1, 2.25, -2.3],
+    ["RecoLab", "#ff2bd6", -3.5, .25, -3.8],
+    ["FieldOps", "#bc8cff", 6.0, .55, -4.2],
+    ["Atlas", "#00f5ff", 1.5, 3.5, -5.4],
+  ];
+
+  return nodes.map(([label, color, x, y, z], i) => {
+    const texture = makeNodeTexture(label, color);
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: texture,
+      transparent: true,
+      opacity: 0.7,
+      depthWrite: false,
+    }));
+    sprite.position.set(x, y, z);
+    sprite.scale.set(1.55, 0.54, 1);
+    sprite.userData = {
+      cx: x,
+      cz: z,
+      baseY: y,
+      radius: 0.22 + i * 0.03,
+      speed: (i % 2 ? -1 : 1) * (0.32 + i * 0.035),
+      phase: i * 1.7,
+    };
+    return sprite;
+  });
+}
+
+function makeNodeTexture(label, color) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 360;
+  canvas.height = 120;
+  const ctx = canvas.getContext("2d");
+  const gradient = ctx.createLinearGradient(0, 0, 360, 120);
+  gradient.addColorStop(0, "rgba(5, 8, 18, 0.88)");
+  gradient.addColorStop(1, "rgba(16, 22, 42, 0.72)");
+  ctx.fillStyle = gradient;
+  roundRect(ctx, 10, 18, 340, 84, 24);
+  ctx.fill();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 3;
+  roundRect(ctx, 10, 18, 340, 84, 24);
+  ctx.stroke();
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(42, 60, 10, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "#f7fbff";
+  ctx.font = "700 30px Syne, Arial";
+  ctx.fillText(label, 68, 70);
+  return new THREE.CanvasTexture(canvas);
+}
+
+function createDataStreams() {
+  const group = new THREE.Group();
+  const paths = [
+    [[-3.4, 2.25, -3.2], [2.05, 0.45, -1.75]],
+    [[5.8, 2.0, -2.4], [2.1, 0.45, -1.75]],
+    [[-3.2, 0.3, -3.9], [2.0, 0.32, -1.7]],
+    [[5.8, 0.55, -4.15], [2.0, 0.32, -1.7]],
+    [[1.5, 3.22, -5.1], [2.05, 0.58, -1.75]],
+  ];
+
+  paths.forEach((path, i) => {
+    const points = path.map(p => new THREE.Vector3(p[0], p[1], p[2]));
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(points),
+      new THREE.LineBasicMaterial({
+        color: i % 2 ? 0xff2bd6 : 0x00f5ff,
+        transparent: true,
+        opacity: 0.18,
+      })
+    );
+    group.add(line);
+  });
+  return group;
 }
 
 function makeBadgeTexture(label) {

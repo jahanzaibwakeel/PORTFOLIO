@@ -1779,8 +1779,9 @@ body::before {
     radial-gradient(circle at 18% 72%, rgba(255,43,214,.10), transparent 26rem);
   background-size: 56px 56px, 56px 56px, auto, auto;
   filter: none;
-  animation: none;
+  animation: deepGridDrift 26s ease-in-out infinite alternate;
   opacity: .75;
+  will-change: transform, opacity;
 }
 
 body::after {
@@ -1789,6 +1790,20 @@ body::after {
 
 #motion-canvas {
   display: none;
+}
+
+#hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 68% 38%, rgba(0,245,255,.18), transparent 26rem),
+    radial-gradient(circle at 28% 66%, rgba(255,43,214,.14), transparent 22rem),
+    linear-gradient(120deg, transparent 0 42%, rgba(248,255,74,.055) 48%, transparent 56%);
+  mix-blend-mode: screen;
+  animation: heroEnergySweep 9s ease-in-out infinite alternate;
 }
 
 nav {
@@ -1840,4 +1855,26 @@ nav {
 .cta-inner::after,
 .p2-contact-wrap::after {
   display: none;
+}
+
+@keyframes deepGridDrift {
+  from {
+    transform: translate3d(-10px, -8px, 0) scale(1.01);
+    opacity: .62;
+  }
+  to {
+    transform: translate3d(14px, 10px, 0) scale(1.035);
+    opacity: .84;
+  }
+}
+
+@keyframes heroEnergySweep {
+  from {
+    opacity: .42;
+    transform: translate3d(-1.5%, 0, 0) scale(1);
+  }
+  to {
+    opacity: .78;
+    transform: translate3d(1.5%, -1%, 0) scale(1.04);
+  }
 }
