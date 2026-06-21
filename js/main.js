@@ -163,24 +163,42 @@ window.typeText = function (el, text, speed = 28, delay = 0) {
 };
 
 /* ── GLITCH EFFECT ─────────────────────────────────── */
+const glitchTimers = new WeakMap();
+
 window.glitchOnce = function (el) {
   if (!el) return;
-  const original = el.textContent;
+  if (!el.dataset.glitchHtml) {
+    el.dataset.glitchHtml = el.innerHTML;
+    el.dataset.glitchText = el.textContent;
+  }
+
+  const previous = glitchTimers.get(el);
+  if (previous) clearInterval(previous);
+
+  const originalText = el.dataset.glitchText;
+  const originalHtml = el.dataset.glitchHtml;
   const chars    = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%!";
   let iter = 0;
   const interval = setInterval(() => {
-    el.textContent = original.split("").map((c, i) => {
+    el.textContent = originalText.split("").map((c, i) => {
       if (c === " ") return " ";
-      if (i < iter)  return original[i];
+      if (i < iter)  return originalText[i];
       return chars[Math.floor(Math.random() * chars.length)];
     }).join("");
-    if (iter >= original.length) { el.textContent = original; clearInterval(interval); }
+    if (iter >= originalText.length) {
+      el.innerHTML = originalHtml;
+      clearInterval(interval);
+      glitchTimers.delete(el);
+    }
     iter += 0.55;
   }, 28);
+  glitchTimers.set(el, interval);
 };
 
 function initGlitch() {
   document.querySelectorAll("[data-glitch]").forEach(el => {
+    el.dataset.glitchHtml = el.innerHTML;
+    el.dataset.glitchText = el.textContent;
     el.addEventListener("mouseenter", () => glitchOnce(el));
   });
 }
