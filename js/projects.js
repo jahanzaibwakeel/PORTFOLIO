@@ -31,6 +31,7 @@ const PROJECTS = [
     `,
     stack: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "SQL", "Valkey/Redis", "Prometheus", "Grafana", "Docker"],
     github: "https://github.com/jahanzaibwakeel/FraudPulse--Fraud-detection-system",
+    live: "https://fraud-pulse-fraud-detection-system.vercel.app",
     featured: true,
   },
   {
@@ -112,7 +113,8 @@ const PROJECTS = [
       <p>Atlas Suite strengthened my understanding of scalable frontend architecture — specifically how to design component APIs, manage shared state across modules, and keep codebases maintainable as they grow. It also pushed my TypeScript generics knowledge significantly.</p>
     `,
     stack: ["React", "Next.js", "TypeScript", "Node.js", "REST API", "Tailwind CSS"],
-    github: "https://github.com/jahanzaibwakeel/atlas-suite",
+    github: "https://github.com/jahanzaibwakeel/atlas-suite.",
+    live: "https://atlas-suite-omega.vercel.app",
     featured: false,
   },
   {
@@ -141,6 +143,33 @@ const PROJECTS = [
     stack: ["React", "JavaScript", "Node.js", "Express", "Hugging Face API", "CSS3"],
     github: "https://github.com/jahanzaibwakeel/AI-Study-chatbot",
     featured: false,
+  },
+  {
+    id: "cliniq-ai",
+    type: "Full-Stack · AI · Healthcare",
+    name: "ClinIQ AI — Clinic Workflow Platform",
+    short: "AI-powered clinic workflow platform for doctors and small clinics. Manages patients, consultations, documents, follow-ups, and clinical notes with doctor-reviewed AI summaries and SOAP note generation.",
+    detail: `
+      <h3>Overview</h3>
+      <p>ClinIQ AI is a local-first clinic workflow platform designed for doctors and small clinics. It brings together patient management, consultation history, clinical documents, follow-up tasks, and AI-assisted note generation inside one practical workflow.</p>
+      <h3>Key Features</h3>
+      <ul>
+        <li>Patient and consultation management for clinic workflows</li>
+        <li>AI visit summaries with doctor-review safety controls</li>
+        <li>SOAP note generation and patient-friendly summaries</li>
+        <li>Clinical task extraction and follow-up tracking</li>
+        <li>Document handling and searchable patient history</li>
+        <li>Production-style deployment with a live Vercel build</li>
+      </ul>
+      <h3>Technical Decisions</h3>
+      <p>The project focuses on useful AI inside a real domain workflow instead of a generic chatbot. The UI is structured around clinical review, safety, and speed, keeping the doctor in control of AI-generated output before it becomes part of the patient record.</p>
+      <h3>What I Learned</h3>
+      <p>ClinIQ AI pushed my thinking around AI-assisted productivity, domain-specific UX, data safety, and how to make generated content useful without removing human review from important decisions.</p>
+    `,
+    stack: ["Next.js", "React", "TypeScript", "AI", "Clinical Notes", "Vercel", "Workflow UX"],
+    github: "https://github.com/jahanzaibwakeel/CLINIQ-AI",
+    live: "https://cliniq-ai-ruby.vercel.app",
+    featured: true,
   },
 ];
 
@@ -206,6 +235,7 @@ function renderProjects() {
       <button class="filter-pill" data-filter="ai">AI</button>
       <button class="filter-pill" data-filter="data">Data</button>
       <button class="filter-pill" data-filter="saas">SaaS</button>
+      <button class="filter-pill" data-filter="healthcare">Healthcare</button>
       <button class="filter-pill" data-filter="frontend">Frontend</button>
     </div>
     <button class="spotlight-toggle" type="button">Spotlight strongest work</button>
@@ -226,10 +256,12 @@ function renderProjects() {
         </div>
       </div>
       <div class="proj-footer">
-        <a href="${p.github}" target="_blank" class="proj-gh"
-           onclick="event.stopPropagation()">↗ GitHub</a>
+        <div class="proj-links">
+          ${p.live ? `<a href="${p.live}" target="_blank" class="proj-gh" onclick="event.stopPropagation()">Live Demo</a>` : ""}
+          <a href="${p.github}" target="_blank" class="proj-gh" onclick="event.stopPropagation()">GitHub</a>
+        </div>
         <button class="btn-sm" onclick="event.stopPropagation(); openProjectModal('${p.id}')">
-          View Details →
+          View Details
         </button>
       </div>
     </div>
@@ -242,6 +274,7 @@ function projectTags(project) {
   if (/\bai\b/.test(blob) || blob.includes("llm") || blob.includes("recommendation") || blob.includes("machine")) tags.push("ai");
   if (blob.includes("fraud") || blob.includes("analytics") || blob.includes("postgresql") || blob.includes("grafana")) tags.push("data");
   if (blob.includes("saas") || blob.includes("field") || blob.includes("multi-role")) tags.push("saas");
+  if (blob.includes("clinic") || blob.includes("clinical") || blob.includes("healthcare") || blob.includes("doctor")) tags.push("healthcare");
   if (blob.includes("frontend") || blob.includes("react") || blob.includes("angular")) tags.push("frontend");
   return tags.length ? tags : ["frontend"];
 }
@@ -313,9 +346,10 @@ window.openProjectModal = function (id) {
     <div class="proj-detail-body" style="color:var(--tm);font-size:.9rem;line-height:1.8">
       ${proj.detail}
     </div>
-    <div style="margin-top:1.5rem;display:flex;gap:.75rem">
-      <a href="${proj.github}" target="_blank" class="btn-volt" style="font-size:.8rem;padding:.6rem 1.2rem">
-        ↗ View on GitHub
+    <div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap">
+      ${proj.live ? `<a href="${proj.live}" target="_blank" class="btn-volt" style="font-size:.8rem;padding:.6rem 1.2rem">Open Live Demo</a>` : ""}
+      <a href="${proj.github}" target="_blank" class="btn-outline" style="font-size:.8rem;padding:.6rem 1.2rem">
+        View on GitHub
       </a>
       <button class="btn-outline" style="font-size:.8rem;padding:.6rem 1.2rem"
               onclick="closeProjectModal()">Close</button>
