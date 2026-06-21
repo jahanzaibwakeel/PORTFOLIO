@@ -242,6 +242,8 @@ function hexToRgba(hex, alpha) {
 
 function initMotionCanvas() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const enableAmbientCanvas = false;
+  if (!enableAmbientCanvas) return;
   if (document.getElementById("three-canvas")) return;
 
   const canvas = document.createElement("canvas");

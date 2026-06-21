@@ -1759,3 +1759,85 @@ nav.scrolled {
     display: none;
   }
 }
+
+/* ── PERFORMANCE BACKGROUND REFINE ─────────────────────────────────── */
+body {
+  background:
+    radial-gradient(circle at 18% 14%, rgba(0, 245, 255, 0.18), transparent 24rem),
+    radial-gradient(circle at 84% 20%, rgba(255, 43, 214, 0.16), transparent 25rem),
+    radial-gradient(circle at 55% 92%, rgba(248, 255, 74, 0.08), transparent 30rem),
+    linear-gradient(135deg, #03030a 0%, #070813 42%, #020611 100%);
+}
+
+body::before {
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    radial-gradient(circle at 70% 20%, rgba(0,245,255,.12), transparent 28rem),
+    radial-gradient(circle at 18% 72%, rgba(255,43,214,.10), transparent 26rem);
+  background-size: 56px 56px, 56px 56px, auto, auto;
+  filter: none;
+  animation: none;
+  opacity: .75;
+}
+
+body::after {
+  opacity: .42;
+}
+
+#motion-canvas {
+  display: none;
+}
+
+nav {
+  background: rgba(3, 3, 10, .82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#about,
+#skills,
+#experience,
+#page1-cta {
+  background:
+    linear-gradient(180deg, rgba(0,245,255,.035), transparent 32%),
+    rgba(7, 8, 19, .72);
+}
+
+#education,
+#projects,
+#page2-contact,
+.lab-section {
+  background:
+    radial-gradient(circle at 78% 20%, rgba(0,245,255,.08), transparent 24rem),
+    radial-gradient(circle at 18% 80%, rgba(255,43,214,.065), transparent 24rem),
+    rgba(3, 5, 14, .78);
+}
+
+.stat-card,
+.about-cv-card,
+.edu-card,
+.cta-inner,
+.sk-card,
+.proj-card,
+.p2-contact-wrap,
+.modal,
+.lab-console,
+.lab-visual {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025)),
+    rgba(7, 9, 20, .86);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.stat-card::after,
+.sk-card::after,
+.proj-card::before,
+.edu-card::before,
+.cta-inner::after,
+.p2-contact-wrap::after {
+  display: none;
+}

@@ -11,7 +11,7 @@ function initHero() {
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.35));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
@@ -75,9 +75,8 @@ function initHero() {
       scrollTrigger: {
         trigger: "#hero",
         start: "top top",
-        end: "+=180%",
-        scrub: 1.4,
-        pin: true,
+        end: "bottom top",
+        scrub: 0.85,
         onUpdate: self => {
           scrollProgress = self.progress;
           cam.progress = self.progress;
@@ -91,7 +90,7 @@ function initHero() {
       }, 0)
       .to(laptop.group.rotation, { y: -0.02, x: 0.02, ease: "power2.inOut" }, 0)
       .to(laptop.group.position, { x: 2.15, y: -1.32, z: -1.72, ease: "power2.inOut" }, 0)
-      .to(".hero-content", { y: -90, opacity: 0.2, filter: "blur(2px)", ease: "power2.inOut" }, 0.34)
+      .to(".hero-content", { y: -70, opacity: 0.3, ease: "power2.inOut" }, 0.34)
       .to(".hero-scroll", { opacity: 0, ease: "power1.out" }, 0.05);
 
     gsap.fromTo("#about", { "--section-glow": 0 }, {
@@ -248,14 +247,19 @@ function createLaptop() {
 
 function createScreenTexture() {
   const canvas = document.createElement("canvas");
-  canvas.width = 1024;
-  canvas.height = 640;
+  canvas.width = 720;
+  canvas.height = 450;
   const ctx = canvas.getContext("2d");
   const texture = new THREE.CanvasTexture(canvas);
   texture.minFilter = THREE.LinearFilter;
   texture.magFilter = THREE.LinearFilter;
 
+  let lastTextureFrame = -1;
   function draw(time, progress) {
+    const frame = Math.floor(time * 12);
+    if (frame === lastTextureFrame && Math.abs(progress - texture.userData.lastProgress) < 0.015) return;
+    lastTextureFrame = frame;
+    texture.userData.lastProgress = progress;
     const w = canvas.width;
     const h = canvas.height;
     ctx.clearRect(0, 0, w, h);
@@ -351,7 +355,7 @@ function roundRect(ctx, x, y, width, height, radius) {
 function createLightTunnel() {
   const group = new THREE.Group();
   const colors = [0x00f5ff, 0xff2bd6, 0xf8ff4a, 0xbc8cff];
-  for (let i = 0; i < 18; i++) {
+  for (let i = 0; i < 10; i++) {
     const ring = new THREE.Mesh(
       new THREE.TorusGeometry(3.4 + i * 0.48, 0.012, 8, 92),
       new THREE.MeshBasicMaterial({
@@ -370,7 +374,7 @@ function createLightTunnel() {
 }
 
 function createFloatingBadges() {
-  const labels = ["API", "SQL", "AI", "UX", "AUTH", "CACHE", "OBS"];
+  const labels = ["API", "SQL", "AI", "UX", "AUTH"];
   const items = [];
   labels.forEach((label, i) => {
     const texture = makeBadgeTexture(label);
@@ -413,7 +417,7 @@ function makeBadgeTexture(label) {
 }
 
 function createStarField() {
-  const count = 950;
+  const count = 420;
   const positions = new Float32Array(count * 3);
   for (let i = 0; i < count; i++) {
     positions[i * 3] = (Math.random() - 0.5) * 90;

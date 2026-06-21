@@ -31,7 +31,7 @@ const PROJECTS = [
     `,
     stack: ["Next.js", "React", "TypeScript", "Node.js", "PostgreSQL", "SQL", "Valkey/Redis", "Prometheus", "Grafana", "Docker"],
     github: "https://github.com/jahanzaibwakeel/FraudPulse--Fraud-detection-system",
-    live: "https://fraud-pulse-fraud-detection-system.vercel.app",
+    live: "https://fraudpulse-jahanzaib.duckdns.org",
     featured: true,
   },
   {
