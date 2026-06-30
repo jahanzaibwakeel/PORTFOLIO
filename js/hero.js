@@ -339,8 +339,8 @@ function createScreenTexture() {
     ctx.font = "500 15px JetBrains Mono, monospace";
     const lines = [
       ["$ npm run ship", "#f8ff4a"],
-      ["> FraudPulse + ClinIQ AI + RecoLab", "#cdd5e0"],
-      ["> APIs, auth, dashboards, databases", "#00f5ff"],
+      ["> DocIntel + Research AI + Knowledge Base", "#cdd5e0"],
+      ["> FastAPI, RAG, LangChain, Qdrant, MongoDB", "#00f5ff"],
       ["> scroll camera: laptop.screen.focus()", "#ff2bd6"],
     ];
     lines.forEach((line, i) => {
@@ -420,11 +420,11 @@ function createFloatingBadges() {
 
 function createProjectNodes() {
   const nodes = [
-    ["FraudPulse", "#00f5ff", -2.8, 2.55, -2.9],
-    ["ClinIQ AI", "#f8ff4a", 6.1, 2.25, -2.3],
-    ["RecoLab", "#ff2bd6", -3.5, .25, -3.8],
-    ["FieldOps", "#bc8cff", 6.0, .55, -4.2],
-    ["Atlas", "#00f5ff", 1.5, 3.5, -5.4],
+    ["DocIntel", "#00f5ff", -3.1, 2.75, -2.9],
+    ["Research AI", "#f8ff4a", 6.2, 2.35, -2.3],
+    ["Knowledge DB", "#ff2bd6", -3.7, .35, -3.8],
+    ["FraudPulse", "#bc8cff", 6.1, .6, -4.2],
+    ["ClinIQ AI", "#00f5ff", 1.5, 3.55, -5.4],
   ];
 
   return nodes.map(([label, color, x, y, z], i) => {

@@ -7,6 +7,84 @@
 /* ── PROJECT DATA ──────────────────────────────────── */
 const PROJECTS = [
   {
+    id: "docintel-ai",
+    type: "Full-Stack · AI · Document Intelligence",
+    name: "DocIntel AI — Document Intelligence Platform",
+    short: "Full-stack AI document intelligence platform with PDF ingestion, OCR, RAG Q&A, semantic search, structured extraction, workspaces, admin operations, notifications, refresh-token auth, password reset, mobile app, and Docker deployment.",
+    detail: `
+      <h3>Overview</h3>
+      <p>DocIntel AI is a production-style AI document intelligence platform built around Python FastAPI and a modern full-stack workflow. It lets users upload documents, process extracted text, ask document-specific questions, search semantically, and manage workspaces from a polished dashboard.</p>
+      <h3>Key Features</h3>
+      <ul>
+        <li>PDF ingestion and OCR-oriented document processing</li>
+        <li>RAG-based document Q&A and semantic search</li>
+        <li>Structured extraction for important fields and document insights</li>
+        <li>Workspace-based organization for teams and document collections</li>
+        <li>Admin operations, notifications, refresh-token auth, and password reset flows</li>
+        <li>Dockerized deployment workflow with production-style services</li>
+      </ul>
+      <h3>Technical Decisions</h3>
+      <p>The backend is centered on FastAPI service boundaries and document-processing workflows, while the frontend focuses on a clean dashboard experience for uploaded documents, AI insights, and user actions. The project is designed to demonstrate practical AI product architecture rather than a simple chatbot.</p>
+      <h3>What I Learned</h3>
+      <p>This project strengthened my understanding of document pipelines, background processing, AI retrieval workflows, auth flows, and how to structure a full-stack AI SaaS product for real users.</p>
+    `,
+    stack: ["Python", "FastAPI", "Next.js", "React", "TypeScript", "RAG", "OCR", "PostgreSQL", "Docker"],
+    github: "https://github.com/jahanzaibwakeel/docintel-ai-platform",
+    featured: true,
+  },
+  {
+    id: "knowledge-base-ai",
+    type: "Full-Stack · AI · MongoDB",
+    name: "AI Knowledge Base Manager",
+    short: "Full-stack AI knowledge base manager with FastAPI, Next.js, MongoDB, JWT auth, document upload, local free RAG embeddings, AI summaries, workspace collaboration, and Docker deployment.",
+    detail: `
+      <h3>Overview</h3>
+      <p>AI Knowledge Base Manager is a MongoDB-backed AI workspace application for uploading, organizing, summarizing, and searching knowledge base documents. It combines FastAPI backend APIs with a Next.js dashboard and AI-powered document insight workflows.</p>
+      <h3>Key Features</h3>
+      <ul>
+        <li>Workspace and knowledge base management</li>
+        <li>Document upload and metadata storage in MongoDB</li>
+        <li>AI summaries and document-level insights</li>
+        <li>Local free RAG embeddings for document retrieval</li>
+        <li>JWT authentication and collaboration-oriented workspace flows</li>
+        <li>Docker deployment setup for repeatable local development</li>
+      </ul>
+      <h3>Technical Decisions</h3>
+      <p>I used MongoDB for flexible document metadata, workspace structures, and knowledge base records. The FastAPI backend keeps document and AI logic separated into clear service layers, while the Next.js frontend presents the workflow as a usable product dashboard.</p>
+      <h3>What I Learned</h3>
+      <p>This project helped me practice document-oriented data modeling, MongoDB-backed application design, AI summarization pipelines, and workspace collaboration patterns.</p>
+    `,
+    stack: ["Python", "FastAPI", "Next.js", "React", "TypeScript", "MongoDB", "JWT", "RAG", "Docker"],
+    github: "https://github.com/jahanzaibwakeel/ai-knowledge-base-manager",
+    featured: true,
+  },
+  {
+    id: "semantic-research",
+    type: "Full-Stack · AI · LangChain · Vector DB",
+    name: "Semantic Research Assistant",
+    short: "Production-style AI research assistant with FastAPI, LangChain, Qdrant, PostgreSQL, Redis/Celery, Next.js, semantic search, document Q&A, citations, summaries, and Docker Compose deployment.",
+    detail: `
+      <h3>Overview</h3>
+      <p>Semantic Research Assistant is a LangChain-powered RAG platform for uploading research documents, generating embeddings, asking questions, retrieving cited answers, and producing AI summaries from a full-stack dashboard.</p>
+      <h3>Key Features</h3>
+      <ul>
+        <li>Document upload, parsing, chunking, and embedding workflows</li>
+        <li>LangChain RAG pipeline for document Q&A</li>
+        <li>Qdrant vector database integration for semantic search</li>
+        <li>Source citations for AI answers</li>
+        <li>PostgreSQL metadata storage and Redis/Celery background jobs</li>
+        <li>Next.js dashboard for documents, search history, summaries, and Q&A</li>
+      </ul>
+      <h3>Technical Decisions</h3>
+      <p>The architecture separates metadata storage, vector retrieval, background processing, and AI orchestration. LangChain handles the retrieval chain, Qdrant stores embeddings, and FastAPI exposes clean endpoints to the frontend.</p>
+      <h3>What I Learned</h3>
+      <p>This project deepened my understanding of embeddings, vector search, source-grounded answers, async processing, and production-style RAG architecture with Python.</p>
+    `,
+    stack: ["Python", "FastAPI", "LangChain", "Qdrant", "PostgreSQL", "Redis", "Celery", "Next.js", "Docker"],
+    github: "https://github.com/jahanzaibwakeel/semantic-research-assistant",
+    featured: true,
+  },
+  {
     id: "fraudpulse",
     type: "Full-Stack · Analytics · Real-Time",
     name: "FraudPulse — Fraud Detection Platform",
@@ -188,7 +266,7 @@ const SKILLS = [
   {
     icon: "🗄️",
     title: "Databases & SQL",
-    tags: ["PostgreSQL", "MongoDB", "MySQL", "SQLite", "SQL (Raw Queries)", "Prisma Migrations", "Query Optimisation", "Redis/Valkey"],
+    tags: ["PostgreSQL", "MongoDB", "MySQL", "SQLite", "SQL (Raw Queries)", "pgvector", "Qdrant", "Prisma Migrations", "Query Optimisation", "Redis/Valkey"],
   },
   {
     icon: "🐳",
@@ -203,7 +281,7 @@ const SKILLS = [
   {
     icon: "🤖",
     title: "AI & Integrations",
-    tags: ["Hugging Face API", "Ollama (Local LLM)", "LLM API Integration", "AI Feature Design", "RAG Concepts", "Model Evaluation"],
+    tags: ["LangChain", "RAG", "Vector Search", "Hugging Face API", "Ollama (Local LLM)", "LLM API Integration", "AI Feature Design", "Embeddings", "Model Evaluation"],
   },
 ];
 
@@ -233,7 +311,10 @@ function renderProjects() {
     <div class="project-filters" aria-label="Project filters">
       <button class="filter-pill active" data-filter="all">All</button>
       <button class="filter-pill" data-filter="ai">AI</button>
+      <button class="filter-pill" data-filter="python">Python/FastAPI</button>
       <button class="filter-pill" data-filter="data">Data</button>
+      <button class="filter-pill" data-filter="vector">Vector DB</button>
+      <button class="filter-pill" data-filter="mongodb">MongoDB</button>
       <button class="filter-pill" data-filter="saas">SaaS</button>
       <button class="filter-pill" data-filter="healthcare">Healthcare</button>
       <button class="filter-pill" data-filter="frontend">Frontend</button>
@@ -272,7 +353,10 @@ function projectTags(project) {
   const blob = `${project.type} ${project.name} ${project.short} ${project.stack.join(" ")}`.toLowerCase();
   const tags = [];
   if (/\bai\b/.test(blob) || blob.includes("llm") || blob.includes("recommendation") || blob.includes("machine")) tags.push("ai");
+  if (blob.includes("python") || blob.includes("fastapi")) tags.push("python");
   if (blob.includes("fraud") || blob.includes("analytics") || blob.includes("postgresql") || blob.includes("grafana")) tags.push("data");
+  if (blob.includes("qdrant") || blob.includes("vector") || blob.includes("semantic") || blob.includes("langchain")) tags.push("vector");
+  if (blob.includes("mongodb") || blob.includes("mongo")) tags.push("mongodb");
   if (blob.includes("saas") || blob.includes("field") || blob.includes("multi-role")) tags.push("saas");
   if (blob.includes("clinic") || blob.includes("clinical") || blob.includes("healthcare") || blob.includes("doctor")) tags.push("healthcare");
   if (blob.includes("frontend") || blob.includes("react") || blob.includes("angular")) tags.push("frontend");
