@@ -1857,6 +1857,47 @@ nav {
   display: none;
 }
 
+#about,
+#lab,
+#education,
+#page1-cta,
+#skills,
+#projects,
+#experience,
+#page2-contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+
+#three-canvas {
+  will-change: transform;
+}
+
+@media (max-width: 760px) {
+  #hero {
+    min-height: 680px;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(180deg, rgba(3,3,10,.55), rgba(3,3,10,.82)),
+      radial-gradient(circle at 50% 58%, rgba(0,245,255,.15), transparent 18rem);
+  }
+
+  .hero-content {
+    max-width: 100%;
+    padding: 0 1.25rem;
+  }
+
+  .project-toolbar {
+    align-items: flex-start;
+  }
+
+  .project-filters {
+    width: 100%;
+  }
+}
+
 @keyframes deepGridDrift {
   from {
     transform: translate3d(-10px, -8px, 0) scale(1.01);

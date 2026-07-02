@@ -7,6 +7,57 @@
 /* ── PROJECT DATA ──────────────────────────────────── */
 const PROJECTS = [
   {
+    id: "buildsage",
+    type: "Java · Spring Boot · AI DevOps",
+    name: "BuildSage — AI CI/CD Intelligence Backend",
+    short: "AI-powered CI/CD intelligence backend built with Java 21 and Spring Boot for pipeline analysis, deployment risk scoring, incidents, release insights, and engineering workflow intelligence.",
+    detail: `
+      <h3>Overview</h3>
+      <p>BuildSage is a Java 21 and Spring Boot backend that brings AI-style intelligence to CI/CD workflows. It focuses on pipeline analysis, deployment risk scoring, incident tracking, and release insights for engineering teams.</p>
+      <h3>Key Features</h3>
+      <ul>
+        <li>Pipeline analysis for CI/CD workflows</li>
+        <li>Deployment risk scoring and release insights</li>
+        <li>Incident-oriented backend workflows</li>
+        <li>Spring Boot API architecture with production-style service boundaries</li>
+        <li>Designed for DevOps visibility and release decision support</li>
+      </ul>
+      <h3>Technical Decisions</h3>
+      <p>I used Java 21 and Spring Boot to build a strong backend-focused project that demonstrates enterprise-style API design, structured domain services, and clean architecture around CI/CD intelligence.</p>
+      <h3>What I Learned</h3>
+      <p>BuildSage strengthened my backend engineering skills in Java, Spring Boot, DevOps workflows, and how to model release risk and pipeline intelligence as API-driven product features.</p>
+    `,
+    stack: ["Java 21", "Spring Boot", "REST API", "AI", "DevOps", "CI/CD", "Docker"],
+    github: "https://github.com/jahanzaibwakeel/BuildSage",
+    featured: true,
+  },
+  {
+    id: "bankflow",
+    type: "Java · Spring Boot · Banking Ledger",
+    name: "BankFlow — Secure Banking Ledger API",
+    short: "Secure Spring Boot 3 banking and double-entry ledger API with JWT auth, PostgreSQL/Flyway, idempotent transfers, row-level concurrency protection, audit logs, Testcontainers, Docker, and CI/CD.",
+    detail: `
+      <h3>Overview</h3>
+      <p>BankFlow is a secure banking and double-entry ledger API built with Spring Boot 3. It models real backend concerns such as authentication, idempotent transfers, database migrations, audit logs, and concurrency-safe financial operations.</p>
+      <h3>Key Features</h3>
+      <ul>
+        <li>JWT authentication and secure API workflows</li>
+        <li>Double-entry ledger architecture for banking-style transactions</li>
+        <li>PostgreSQL database with Flyway migrations</li>
+        <li>Idempotent money transfers and row-level concurrency protection</li>
+        <li>Audit logs for traceable financial operations</li>
+        <li>Testcontainers, Docker, and CI/CD support</li>
+      </ul>
+      <h3>Technical Decisions</h3>
+      <p>The project uses Spring Boot 3 and PostgreSQL to demonstrate reliable transactional backend design. Idempotency, row-level locking, and auditability make it closer to a real financial backend than a basic CRUD API.</p>
+      <h3>What I Learned</h3>
+      <p>BankFlow helped me practice enterprise Java backend patterns, financial transaction modeling, concurrency control, database migrations, integration testing, and secure API design.</p>
+    `,
+    stack: ["Java", "Spring Boot 3", "PostgreSQL", "Flyway", "JWT", "Testcontainers", "Docker", "CI/CD"],
+    github: "https://github.com/jahanzaibwakeel/BankFlow",
+    featured: true,
+  },
+  {
     id: "docintel-ai",
     type: "Full-Stack · AI · Document Intelligence",
     name: "DocIntel AI — Document Intelligence Platform",
@@ -261,17 +312,17 @@ const SKILLS = [
   {
     icon: "⚙️",
     title: "Backend",
-    tags: ["Node.js", "Express.js", "FastAPI", "Python", "REST API Design", "JWT Authentication", "Prisma ORM", "Middleware Patterns"],
+    tags: ["Node.js", "Express.js", "FastAPI", "Python", "Java", "Spring Boot", "REST API Design", "JWT Authentication", "Prisma ORM", "Middleware Patterns"],
   },
   {
     icon: "🗄️",
     title: "Databases & SQL",
-    tags: ["PostgreSQL", "MongoDB", "MySQL", "SQLite", "SQL (Raw Queries)", "pgvector", "Qdrant", "Prisma Migrations", "Query Optimisation", "Redis/Valkey"],
+    tags: ["PostgreSQL", "MongoDB", "MySQL", "SQLite", "SQL (Raw Queries)", "pgvector", "Qdrant", "Flyway", "Prisma Migrations", "Query Optimisation", "Redis/Valkey"],
   },
   {
     icon: "🐳",
     title: "DevOps & Tooling",
-    tags: ["Docker", "Docker Compose", "GitHub Actions", "Vercel", "Git", "Postman", "Prometheus", "Grafana", "VS Code"],
+    tags: ["Docker", "Docker Compose", "GitHub Actions", "Vercel", "Git", "Postman", "Testcontainers", "Prometheus", "Grafana", "VS Code"],
   },
   {
     icon: "🧠",
@@ -311,6 +362,7 @@ function renderProjects() {
     <div class="project-filters" aria-label="Project filters">
       <button class="filter-pill active" data-filter="all">All</button>
       <button class="filter-pill" data-filter="ai">AI</button>
+      <button class="filter-pill" data-filter="java">Java/Spring</button>
       <button class="filter-pill" data-filter="python">Python/FastAPI</button>
       <button class="filter-pill" data-filter="data">Data</button>
       <button class="filter-pill" data-filter="vector">Vector DB</button>
@@ -353,6 +405,7 @@ function projectTags(project) {
   const blob = `${project.type} ${project.name} ${project.short} ${project.stack.join(" ")}`.toLowerCase();
   const tags = [];
   if (/\bai\b/.test(blob) || blob.includes("llm") || blob.includes("recommendation") || blob.includes("machine")) tags.push("ai");
+  if (blob.includes("java") || blob.includes("spring")) tags.push("java");
   if (blob.includes("python") || blob.includes("fastapi")) tags.push("python");
   if (blob.includes("fraud") || blob.includes("analytics") || blob.includes("postgresql") || blob.includes("grafana")) tags.push("data");
   if (blob.includes("qdrant") || blob.includes("vector") || blob.includes("semantic") || blob.includes("langchain")) tags.push("vector");

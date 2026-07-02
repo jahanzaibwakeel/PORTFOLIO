@@ -8,10 +8,12 @@ function initHero() {
   const canvas = document.getElementById("three-canvas");
   const hero = document.getElementById("hero");
   if (!canvas || !hero || typeof THREE === "undefined") return;
+  const smallViewport = window.matchMedia("(max-width: 760px)").matches;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.35));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, smallViewport ? 1 : 1.35));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
@@ -83,7 +85,7 @@ function initHero() {
         start: "top top",
         end: "+=120%",
         scrub: 1,
-        pin: true,
+        pin: !smallViewport && !prefersReducedMotion,
         anticipatePin: 1,
         onUpdate: self => {
           scrollProgress = self.progress;
@@ -121,15 +123,28 @@ function initHero() {
     }, { passive: true });
   }
 
+  let resizeTicking = false;
   window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    if (resizeTicking) return;
+    resizeTicking = true;
+    requestAnimationFrame(() => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth <= 760 ? 1 : 1.35));
+      resizeTicking = false;
+    });
   });
 
   let t = 0;
+  let pageVisible = true;
+  document.addEventListener("visibilitychange", () => {
+    pageVisible = !document.hidden;
+  });
+
   function animate() {
     requestAnimationFrame(animate);
+    if (!pageVisible) return;
     t += 0.016;
 
     laptop.update(t, scrollProgress);
@@ -339,8 +354,8 @@ function createScreenTexture() {
     ctx.font = "500 15px JetBrains Mono, monospace";
     const lines = [
       ["$ npm run ship", "#f8ff4a"],
-      ["> DocIntel + Research AI + Knowledge Base", "#cdd5e0"],
-      ["> FastAPI, RAG, LangChain, Qdrant, MongoDB", "#00f5ff"],
+      ["> BuildSage + BankFlow + DocIntel", "#cdd5e0"],
+      ["> Java, Spring Boot, FastAPI, RAG, Qdrant", "#00f5ff"],
       ["> scroll camera: laptop.screen.focus()", "#ff2bd6"],
     ];
     lines.forEach((line, i) => {
@@ -420,10 +435,10 @@ function createFloatingBadges() {
 
 function createProjectNodes() {
   const nodes = [
-    ["DocIntel", "#00f5ff", -3.1, 2.75, -2.9],
-    ["Research AI", "#f8ff4a", 6.2, 2.35, -2.3],
-    ["Knowledge DB", "#ff2bd6", -3.7, .35, -3.8],
-    ["FraudPulse", "#bc8cff", 6.1, .6, -4.2],
+    ["BuildSage", "#00f5ff", -3.1, 2.75, -2.9],
+    ["BankFlow", "#f8ff4a", 6.2, 2.35, -2.3],
+    ["DocIntel", "#ff2bd6", -3.7, .35, -3.8],
+    ["Research AI", "#bc8cff", 6.1, .6, -4.2],
     ["ClinIQ AI", "#00f5ff", 1.5, 3.55, -5.4],
   ];
 

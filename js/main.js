@@ -8,8 +8,11 @@
 const cursor     = document.getElementById("cursor");
 const cursorRing = document.getElementById("cursor-ring");
 let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+const finePointer = window.matchMedia("(pointer: fine)").matches;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 document.addEventListener("mousemove", e => {
+  if (!finePointer || reduceMotion) return;
   mouseX = e.clientX;
   mouseY = e.clientY;
   if (cursor) {
@@ -19,6 +22,11 @@ document.addEventListener("mousemove", e => {
 });
 
 (function animateRing() {
+  if (!finePointer || reduceMotion) {
+    cursor && (cursor.style.display = "none");
+    cursorRing && (cursorRing.style.display = "none");
+    return;
+  }
   ringX += (mouseX - ringX) * 0.11;
   ringY += (mouseY - ringY) * 0.11;
   if (cursorRing) {
@@ -29,6 +37,7 @@ document.addEventListener("mousemove", e => {
 })();
 
 function initCursorHover() {
+  if (!finePointer || reduceMotion) return;
   document.querySelectorAll("a, button, .proj-card, .stat-card, .sk-card, .modal-link, .ct-link").forEach(el => {
     el.addEventListener("mouseenter", () => {
       cursor    && cursor.classList.add("cursor-grow");
@@ -45,9 +54,15 @@ function initCursorHover() {
 function initProgress() {
   const bar = document.getElementById("progress");
   if (!bar) return;
+  let ticking = false;
   window.addEventListener("scroll", () => {
-    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-    bar.style.width = Math.min(pct, 100) + "%";
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      bar.style.width = Math.min(pct, 100) + "%";
+      ticking = false;
+    });
   }, { passive: true });
 }
 
@@ -55,8 +70,14 @@ function initProgress() {
 function initNav() {
   const nav = document.querySelector("nav");
   if (!nav) return;
+  let ticking = false;
   window.addEventListener("scroll", () => {
-    nav.classList.toggle("scrolled", window.scrollY > 60);
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      nav.classList.toggle("scrolled", window.scrollY > 60);
+      ticking = false;
+    });
   }, { passive: true });
 }
 
@@ -205,6 +226,7 @@ function initGlitch() {
 
 /* ── MAGNETIC BUTTONS ──────────────────────────────── */
 function initMagnetic() {
+  if (!finePointer || reduceMotion) return;
   document.querySelectorAll(".btn-volt, .btn-outline").forEach(btn => {
     btn.addEventListener("mousemove", e => {
       const r = btn.getBoundingClientRect();
@@ -218,6 +240,7 @@ function initMagnetic() {
 
 /* ── SKILL CARD TILT ───────────────────────────────── */
 function initTilt() {
+  if (!finePointer || reduceMotion) return;
   document.querySelectorAll(".sk-card, .proj-card, .stat-card").forEach(card => {
     card.addEventListener("mousemove", e => {
       const r  = card.getBoundingClientRect();
